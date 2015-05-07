@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using StreamMerge.App.Quiz.DataModel;
+using StreamMerge.App.Util;
 
 namespace StreamMerge.App.Quiz
 {
@@ -20,12 +21,13 @@ namespace StreamMerge.App.Quiz
 
         public StreamStore()
         {
-            _store = new Dictionary<ISet<string>, StreamState>();
+            var setComparer = new SetEqualityComparer<string>(StreamNameComparer.Comparer);
+            _store = new Dictionary<ISet<string>, StreamState>(setComparer);
         }
 
         public StreamState GetStreams(IEnumerable<string> streamNames)
         {
-            var nameSet = new HashSet<string>(streamNames);
+            var nameSet = new HashSet<string>(streamNames, StreamNameComparer.Comparer);
             if(_store.ContainsKey(nameSet))
             {
                 return _store[nameSet];
@@ -38,7 +40,7 @@ namespace StreamMerge.App.Quiz
 
         public void AddStreams(StreamState state)
         {
-            var nameSet = new HashSet<string>(state.StreamNames);
+            var nameSet = new HashSet<string>(state.StreamNames, StreamNameComparer.Comparer);
             if (_store.ContainsKey(nameSet))
             {
                 throw new InvalidOperationException("Cannot add the state for the same stream collection more than once.");

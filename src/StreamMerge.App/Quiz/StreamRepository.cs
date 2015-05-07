@@ -62,7 +62,7 @@ namespace StreamMerge.App.Quiz
 
         private async Task<StreamState> InitializeStreamReaderAsync(IEnumerable<string> streamNames)
         {
-            var values = new Dictionary<string, int>();
+            var values = new Dictionary<string, int>(StreamNameComparer.Comparer);
             foreach(var s in streamNames)
             {
                 var nextStreamValue = await _client.GetNextValueAsync(s);
