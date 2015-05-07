@@ -1,3 +1,4 @@
 .vs/
 *.user
 *.lock.json
+src/StreamMerge/wwwroot/bin/
