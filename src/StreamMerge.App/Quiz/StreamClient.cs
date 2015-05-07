@@ -39,11 +39,16 @@ namespace StreamMerge.App.Quiz
             {
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                using (var responseStream = await client.GetStreamAsync(url))
-                using (var streamReader = new StreamReader(responseStream))
-                using (var jsonTextReader = new JsonTextReader(streamReader))
+                using (var response = await client.GetAsync(url))
                 {
-                    return _serializer.Deserialize<NamedStreamResponse>(jsonTextReader);
+                    using (var responseStream = await response.Content.ReadAsStreamAsync())
+                    using(var textReader = new StreamReader(responseStream))
+                    using (var jsonReader = new JsonTextReader(textReader))
+
+                    {
+                        var deserializer = new JsonSerializer();
+                        return deserializer.Deserialize<NamedStreamResponse>(jsonReader);
+                    }
                 }
             }
         }
