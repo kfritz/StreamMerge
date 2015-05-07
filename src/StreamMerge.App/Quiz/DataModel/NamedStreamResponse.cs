@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace StreamMerge.App.Quiz.DataModel
 {
@@ -17,6 +18,7 @@ namespace StreamMerge.App.Quiz.DataModel
             StreamName = streamName;
         }
 
+        [JsonProperty("stream")]
         public string StreamName { get; private set; }
     }
 }

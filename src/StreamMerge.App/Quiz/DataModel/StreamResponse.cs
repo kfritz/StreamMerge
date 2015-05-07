@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace StreamMerge.App.Quiz.DataModel
 {
@@ -17,7 +18,10 @@ namespace StreamMerge.App.Quiz.DataModel
             LastValue = lastValue;
         }
 
+        [JsonProperty("current")]
         public int CurrentValue { get; private set; }
+
+        [JsonProperty("last")]
         public int? LastValue { get; private set; }
     }
 }
