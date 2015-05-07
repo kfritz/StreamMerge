@@ -24,7 +24,10 @@ namespace StreamMerge.App.Quiz
 
         public async Task<StreamResponse> GetNextAsync(params string[] streamNames)
         {
-            // TODO-KPF: Assert collection not empty
+            if (streamNames.Length == 0)
+            {
+                throw new ArgumentException("The collection of stream names should contain at least one element.", "streamNames");
+            }
 
             // Get all the current values of each stream
             var state = _store.GetStreams(streamNames);
@@ -62,13 +65,25 @@ namespace StreamMerge.App.Quiz
 
         private async Task<StreamState> InitializeStreamReaderAsync(IEnumerable<string> streamNames)
         {
+            int? lastValue = null;
             var values = new Dictionary<string, int>(StreamNameComparer.Comparer);
             foreach(var s in streamNames)
             {
                 var nextStreamValue = await _client.GetNextValueAsync(s);
                 values.Add(s, nextStreamValue.CurrentValue);
+                if(lastValue == null || lastValue < nextStreamValue.LastValue)
+                {
+                    // Reconstruct what the last max value was by looking at the current response.
+                    lastValue = nextStreamValue.LastValue;
+                }
             }
-            return new StreamState(values);
+
+            if(lastValue == null)
+            {
+                throw new ArgumentException("The collection of stream names should contain at least one element.", "streamNames");
+            }
+
+            return new StreamState(values, lastValue.Value);
         }
     }
 }

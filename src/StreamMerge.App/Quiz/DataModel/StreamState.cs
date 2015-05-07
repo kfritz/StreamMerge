@@ -9,15 +9,15 @@ namespace StreamMerge.App.Quiz.DataModel
     {
         private readonly IDictionary<string, int> _currentValues;
 
-        public StreamState(IDictionary<string, int> initialValues)
+        public StreamState(IDictionary<string, int> initialValues, int lastValue)
         {
             _currentValues = initialValues;
-            LastValue = null;
+            LastValue = lastValue;
         }
 
-        public int? LastValue { get; private set; }
+        public int LastValue { get; private set; }
 
-        public int? this[string streamName]
+        public int this[string streamName]
         {
             get
             {
