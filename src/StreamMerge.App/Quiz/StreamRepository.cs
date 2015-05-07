@@ -6,11 +6,19 @@ using StreamMerge.App.Quiz.DataModel;
 
 namespace StreamMerge.App.Quiz
 {
+    /// <summary>
+    /// A service for merging streams and retrieving the next value in the unified stream.
+    /// </summary>
     public interface IStreamRepository
     {
+        /// <summary>
+        /// Gets the next value in the merged stream.
+        /// </summary>
+        /// <param name="streamNames">The name of the streams to merge.</param>
+        /// <returns>An object describing the current and previous values in the merged stream.</returns>
         Task<StreamResponse> GetNextAsync(params string[] streamNames);
     }
-
+    
     internal class StreamRepository : IStreamRepository
     {
         private readonly IStreamClient _client;
