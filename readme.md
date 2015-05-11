@@ -18,41 +18,31 @@ ASP.net 5 can target the newly open sourced [CoreCLR](http://blogs.msdn.com/b/do
 ### Easier Way
 The easier way to run this application is using the package hosted on GitHub:
 
-1.  Install the DNVM (a version manager for DNX runtimes).
-	*  Windows: Run this from a console window with administrator privileges: `@powershell -NoProfile -ExecutionPolicy unrestricted -Command "&{$Branch='dev';iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.ps1'))}"`.
-	*  OS X: 
-		1.  [Install Homebrew](http://www.brew.sh).
-		2.  Run `brew tap aspnet/dnx`.
-		3.  Run `brew update`.
-		4.  Run `brew install dnvm`.
-	*  Linux: Follow [this guide](https://github.com/aspnet/Home/blob/dev/GettingStartedDeb.md); good luck.
-2.  Run `dnvm upgrade` to install a version of the DNX.
-3.  Download [the packaged application](https://github.com/kfritz/StreamMerge/releases/download/v1/StreamMerge.zip).
-4.  Extract the zip archive.
-5.  Start the application.
+1.  Install a .NET Execution Environment (DNX).
+    *  [Windows installation instructions](http://docs.asp.net/en/latest/getting-started/installing-on-windows.html#install-asp-net-standalone)
+    *  [OS X installation instructions](http://docs.asp.net/en/latest/getting-started/installing-on-mac.html#install-asp-net-5-on-os-x)
+    *  [Linux installation instructions](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html#installing-asp-net-5-on-linux)
+2.  Download [the packaged application](https://github.com/kfritz/StreamMerge/releases/download/v1/StreamMerge.zip).
+3.  Extract the zip archive.
+4.  Start the application.
 	*  Windows: run `web.cmd`.
 	*  Bash: run `web`.
-6.  Issue GET requests to http://localhost:5000/quiz/merge with the appropriate query string parameters.
+5.  Issue GET requests to http://localhost:5000/quiz/merge with the appropriate query string parameters.
 
 ### Harder Way
 
 To run the application from scratch, one must [clone this repository](http://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository) and then [setup DNX](https://github.com/aspnet/Home/blob/dev/README.md).  Once DNX is installed (either on Windows, OS X, or Linux), one should go through the process of getting the required packages in position and starting the runtime.
 
-1.  Install the DNVM (a version manager for DNX runtimes).
-	*  Windows: Run this from a console window with administrator privileges: `@powershell -NoProfile -ExecutionPolicy unrestricted -Command "&{$Branch='dev';iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.ps1'))}"`.
-	*  OS X: 
-		1.  [Install Homebrew](http://www.brew.sh).
-		2.  Run `brew tap aspnet/dnx`.
-		3.  Run `brew update`.
-		4.  Run `brew install dnvm`.
-	*  Linux: Follow [this guide](https://github.com/aspnet/Home/blob/dev/GettingStartedDeb.md); good luck.
-2.  Run `dnvm upgrade` to install a version of the DNX.
-3.  Clone this repository.
-4.  Change directories to the root of the cloned repository.
-5.  Run `dnu restore` to restore the required packages.
-6.  Change directories to .\src\StreamMerge.
-7.  Start the application with the command `dnx . web` on Windows or `dnx . kestrel` on OS X/Linux.
-8.  Issue GET requests to http://localhost:5000/quiz/merge with the appropriate query string parameters.
+1.  Install a .NET Execution Environment (DNX).
+    *  [Windows installation instructions](http://docs.asp.net/en/latest/getting-started/installing-on-windows.html#install-asp-net-standalone)
+    *  [OS X installation instructions](http://docs.asp.net/en/latest/getting-started/installing-on-mac.html#install-asp-net-5-on-os-x)
+    *  [Linux installation instructions](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html#installing-asp-net-5-on-linux)
+2.  Clone this repository.
+3.  Change directories to the root of the cloned repository.
+4.  Run `dnu restore` to restore the required packages.
+5.  Change directories to .\src\StreamMerge.
+6.  Start the application with the command `dnx . web` on Windows or `dnx . kestrel` on OS X/Linux.
+7.  Issue GET requests to http://localhost:5000/quiz/merge with the appropriate query string parameters.
 
 Note, I haven't actually tried this on OS X and Linux; your mileage may vary. 
 
